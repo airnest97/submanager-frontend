@@ -1,0 +1,68 @@
+.landingPageBody{
+    background-color: var(--background);
+    min-height: 100vh;
+    min-width: 100vw;
+}
+.intro{
+    display: flex;
+}
+.picture img{
+    width: 100%;
+}
+.text button{
+    border: none;
+    margin-top: 2rem;
+    padding: 3% 10%;
+    background-color: var(--orange);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: color, background-color, .7s;
+    cursor: pointer;
+}
+.text button:hover{
+    background-color: #FFFFFF;
+    color: var(--background);
+
+}
+
+@media (min-width: 200px) and  (max-width: 1024px){
+    .intro{
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        margin: 8%;
+
+    }
+
+    .picture{
+        width: 100%;
+        margin-top: 10%;
+    }
+
+    .text{
+        font-size: 1.3rem;
+        color: #FFFFFF;
+    }
+}
+@media (min-width: 701px) and  (max-width: 1024px){}
+@media (min-width: 1024px){
+    .intro{
+        justify-content: space-between;
+        margin: 2% 10%;
+    }
+
+    .text{
+        font-size: 1.7rem;
+        width: 60%;
+        color: #FFFFFF;
+        margin-top: 7%;
+    }
+
+    .picture{
+        width: 50%;
+        /*margin-right: 1%;*/
+    }
+}

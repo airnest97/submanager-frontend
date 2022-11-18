@@ -1,0 +1,32 @@
+.resetPassword{
+    background-color: var(--background);
+    height: 100vh;
+}
+
+.form{
+
+    padding: 2%;
+}
+
+.resetPassword .submit , .disabled{
+    margin-left: 5%;
+}
+
+@media (min-width: 200px) and  (max-width: 1023px){
+    .form{
+        margin-top: 20%;
+        margin-left: 5%;
+        width: 90%;
+    }
+}
+
+@media (min-width: 1024px){
+    .form{
+        margin-top: 5%;
+        margin-left: 27%;
+        width: 50%;
+    }
+}
+
+
+
