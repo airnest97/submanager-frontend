@@ -251,7 +251,18 @@ const CreateSubscription = () => {
       nextPayment: values.nextPayment,
       paymentCycle: values.paymentCycle,
     };
-    console.log(newSubscriptionDetails);
+
+    if (!values.nameOfSubscription ||
+      !values.priceOfSubscription ||
+      !values.category ||
+      !values.description ||
+      !values.recurringPayment ||
+      !values.nextPayment ||
+      !values.paymentCycle) {
+      return
+    }
+
+    console.log("values of sub body", newSubscriptionDetails);
     console.log(auth);
 
     const options = {
@@ -303,7 +314,7 @@ const CreateSubscription = () => {
       />
 
       <div className="options">
-      <label for="category">Choose a Category</label>
+        <label htmlFor="category">Choose a Category</label>
         <select
           name="category"
           id="category"
@@ -328,7 +339,7 @@ const CreateSubscription = () => {
       />
 
       <div className="options">
-      <label for="recurringPayment">Reccurring Payment:</label>
+        <label htmlFor="recurringPayment">Reccurring Payment:</label>
         <select
           name="recurringPayment"
           id="recurringPayment"
@@ -336,7 +347,7 @@ const CreateSubscription = () => {
           onChange={handleChange}
         >
           <option>select</option>
-          <option value="RECURRING_PAYMENT">Reccurring Paymen</option>
+          <option value="RECURRING_PAYMENT">Reccurring Payment</option>
           <option value="ONE_TIME_PAYMENT">One Time Payment</option>
         </select>
       </div>
@@ -350,12 +361,12 @@ const CreateSubscription = () => {
       />
 
       <div className="options">
-        <label for="paymentCycle">Choose a Payment Cycle</label>
+        <label htmlFor="paymentCycle">Choose a Payment Cycle</label>
         <select name="paymentCycle" id="paymentCycle" onChange={handleChange}>
           <option>select</option>
           <option value="DAILY">Daily</option>
           <option value="WEEKLY">Weekly</option>
-          <option value="MONTHLY">Mothly</option>
+          <option value="MONTHLY">Monthly</option>
           <option value="QUARTERLY">Quarterly</option>
           <option value="HALF_QUARTERLY">Half Quarterly</option>
           <option value="YEARLY"></option>
@@ -368,7 +379,7 @@ const CreateSubscription = () => {
         type={"button"}
         buttonStyle={formValid ? "solid" : "disabled"}
       >
-        Join Event
+        Add Subscription
       </Button>
     </div>
   );

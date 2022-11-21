@@ -89,7 +89,7 @@ const Register = ({change}) => {
             body: JSON.stringify(registrationDetails),
         };
 
-        let url = "htts://submanage.herokuapp.com/api/v1/auth/signup"
+        let url = "https://submanage.herokuapp.com/api/v1/auth/signup"
         try {
             const response = await fetch(url, options);
             const data = await response.json();
