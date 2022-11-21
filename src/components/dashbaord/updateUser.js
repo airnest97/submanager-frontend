@@ -17,7 +17,6 @@ const UpdateUser = () => {
             <Formik initialValues={{
                 firstName: "",
                 lastName: "",
-                email: "",
                 phoneNumber: "",
                 // nameOfSubscription: initialSubDetails.nameOfSubscription,
                 // priceOfSubscription: initialSubDetails.priceOfSubscription,
@@ -35,11 +34,6 @@ const UpdateUser = () => {
                         if (!values. lastName) {
                             errors.name = "Please enter your last name";
                         }
-
-                        if (!values.email) {
-                            errors.email = "Please enter an email";
-                        }
-
                         const phoneRegex = /(234|0)\d{10}/
                         if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber)) {
                             errors.phoneNumber = "Please enter a valid number";
@@ -51,7 +45,6 @@ const UpdateUser = () => {
                         updateSub(
                             values.firstName,
                             values.lastName,
-                            values.email,
                             values.phoneNumber,
                         )
                             .then(() => {
@@ -92,20 +85,6 @@ const UpdateUser = () => {
                                     type="text"
                                     value={values.lastName}
                                     placeholder="Enter email"
-                                    inputBodyClassName={"input-body"}
-                                    labelStyle={"labelStyleSub"}
-                                    inputStyle={"inputStyleSub"}
-                                    component={CustomInput}
-                                    onChange={handleChange}
-                                    onBlur={handleBlur}
-                                />
-
-                                <Field
-                                    label="Email"
-                                    id="email"
-                                    name="email"
-                                    type="email"
-                                    value={values.email}
                                     inputBodyClassName={"input-body"}
                                     labelStyle={"labelStyleSub"}
                                     inputStyle={"inputStyleSub"}
