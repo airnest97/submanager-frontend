@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
-import React, {useState,  useContext,  useCallback,  useEffect,} from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import React, { useState, useContext, useCallback, useEffect, } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { authContext } from "../../store/context";
 import { CiSearch } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
@@ -34,7 +34,7 @@ const Subscriptions = () => {
     };
     let url = `https://submanage.herokuapp.com/api/v1/user/${id}`
 
-        console.log("id is ", id)
+    console.log("id is ", id)
 
     const response = await fetch(url, options);
 
@@ -46,23 +46,23 @@ const Subscriptions = () => {
     }
   };
 
-  const search = async()=>{
+  const search = async () => {
     setLoading(true)
-    const value =searchPhrase
+    const value = searchPhrase
     const res = await fetch(`https://submanage.herokuapp.com/v1/user/search?userId=1&subscriptionName/${value}`, {
-        method: 'GET'
-    }) 
+      method: 'GET'
+    })
 
-    if(res.ok){
+    if (res.ok) {
       const data = await res.json();
       setSubscriptionList(data)
       setLoading(false);
       console.log(data)
     }
 
-}
+  }
 
-const getSubscriptions = useCallback(async () => {
+  const getSubscriptions = useCallback(async () => {
     setLoading(true);
     const options = {
       method: "GET",
@@ -83,7 +83,7 @@ const getSubscriptions = useCallback(async () => {
     }
   }, [auth.token, auth.userId]);
 
-  
+
   useEffect(() => {
     getSubscriptions();
   }, [getSubscriptions]);
@@ -131,13 +131,13 @@ const getSubscriptions = useCallback(async () => {
           name="search"
           value={searchPhrase}
           placeholder="search for a subscription...."
-          onKeyDown={e => e.key === 'Enter' && search() }
+          onKeyDown={e => e.key === 'Enter' && search()}
           onChange={(e) => updateSearchPhrase(e)}
         />
         <CiSearch />
       </div>
       {subscriptionList.map((subObj, index) => (
-        <div className="subscription-cards">
+        <div className="subscription-cards" key={index}>
           <div className="card">
             <h1>{subObj.nameOfSubscription}</h1>
             <p>Expires: {subObj.nextPayment}</p>

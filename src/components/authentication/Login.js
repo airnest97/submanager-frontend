@@ -78,7 +78,6 @@ function Login() {
         const loginDetails = {
             email: email,
             password: password,
-
         };
 
         console.log(loginDetails)
