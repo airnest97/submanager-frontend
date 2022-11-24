@@ -1,16 +1,11 @@
-import React from 'react';
-import {useState} from "react";
-import {Field, Formik} from "formik";
+import React, { useContext } from 'react';
+import { useState } from "react";
+import { Field, Formik } from "formik";
 import CustomInput from "../reuseables/input";
+import { authContext } from '../../store/context';
 
 const UpdateUser = () => {
-    const [initialSubDetails, setInitialInvoiceDetails] = useState(null);
-    // const [loading, setLoading] = useState(false);
-
-
-    const updateSub = async () => {
-        console.log("h1")
-    }
+    const { auth } = useContext(authContext);
 
     return (
         <div className="sub">
@@ -18,49 +13,49 @@ const UpdateUser = () => {
                 firstName: "",
                 lastName: "",
                 phoneNumber: "",
-                // nameOfSubscription: initialSubDetails.nameOfSubscription,
-                // priceOfSubscription: initialSubDetails.priceOfSubscription,
-                // category: initialSubDetails.category,
-                // description: initialSubDetails.description,
-                // recurringPayment: initialSubDetails.recurringPayment,
-
-
             }}
-                    validate={(values) => {
-                        const errors = {};
-                        if (!values.firstName) {
-                            errors.name = "Please enter your first name";
-                        }
-                        if (!values. lastName) {
-                            errors.name = "Please enter your last name";
-                        }
-                        const phoneRegex = /(234|0)\d{10}/
-                        if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber)) {
-                            errors.phoneNumber = "Please enter a valid number";
-                        }
+                validate={(values) => {
+                    const errors = {};
+                    if (!values.firstName) {
+                        errors.name = "Please enter your first name";
+                    }
+                    if (!values.lastName) {
+                        errors.name = "Please enter your last name";
+                    }
+                    const phoneRegex = /(234|0)\d{10}/
+                    if (!values.phoneNumber || !phoneRegex.test(values.phoneNumber)) {
+                        errors.phoneNumber = "Please enter a valid number";
+                    }
 
-                        return errors;
-                    }}
-                    onSubmit={(values, { setSubmitting }) => {
-                        updateSub(
-                            values.firstName,
-                            values.lastName,
-                            values.phoneNumber,
-                        )
-                            .then(() => {
-                                setSubmitting(false);
-                            })
+                    return errors;
+                }}
+                onSubmit={async (values, { setSubmitting }) => {
+                    let url = `https://submanage.herokuapp.com/api/v1/user/updateUser/${auth.userId}`
+                    const options = {
+                        method: "PATCH",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${auth.token}`,
+                        },
+                        body: JSON.stringify(values),
+                    };
+                    try {
+                        const response = await fetch(url, options);
+                        const data = await response.json();
+                    } catch (error) {
+                        throw new Error(error.message)
+                    }
 
-                    }}>
+                }}>
 
                 {({
-                      isValid,
-                      values,
-                      handleChange,
-                      handleSubmit,
-                      handleBlur,
-                      isSubmitting,
-                  }) => (
+                    isValid,
+                    values,
+                    handleChange,
+                    handleSubmit,
+                    handleBlur,
+                    isSubmitting,
+                }) => (
                     <>
                         <div className="sub-form">
                             <form onSubmit={handleSubmit}>
